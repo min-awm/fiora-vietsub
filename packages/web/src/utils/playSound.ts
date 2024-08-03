@@ -36,7 +36,7 @@ async function play() {
         try {
             await $audio.play();
         } catch (err) {
-            console.warn('播放新消息提示音失败', err.message);
+            console.warn('Không phát được âm báo tin nhắn mới', err.message);
         } finally {
             isPlaying = false;
         }

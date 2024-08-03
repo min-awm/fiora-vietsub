@@ -1,17 +1,33 @@
-version: '3.2'
-
+version: '3.8'
 services:
-  mongodb:
-    image: mongo
-    restart: always
-  redis:
-    image: redis
-    restart: always
-  fiora:
-    build: .
+  cache:
+    image: redis:6.2-alpine
     restart: always
     ports:
-      - "9200:9200"
+      - 6379:6379
+    env_file:
+      - .env
+    command: redis-server --save 20 1 --loglevel warning --requirepass $REDIS_PASS
+    container_name: fiora-cache-redis
+    volumes: 
+      - cache:/data
+
+  mongo-db:
+    image: mongo
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - mongodb:/data/db
+    ports:
+      - 27017:27017
+    container_name: fiora-mongo-db
+    command: mongod --quiet --logpath /dev/null
     environment:
-      - Database=mongodb://mongodb/fiora
-      - RedisHost=redis
+      MONGO_INITDB_ROOT_USERNAME: $MONGODB_USER
+      MONGO_INITDB_ROOT_PASSWORD: $MONGODB_PASSWORD
+
+volumes:
+  mongodb:
+  cache:
+    driver: local

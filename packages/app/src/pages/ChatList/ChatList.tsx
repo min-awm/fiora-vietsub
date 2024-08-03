@@ -26,7 +26,7 @@ export default function ChatList() {
             messages.length > 0 ? messages[messages.length - 1] : null;
 
         let time = new Date(createTime);
-        let preview = '暂无消息';
+        let preview = 'Chưa có tin gì mới';
         if (lastMessage) {
             time = new Date(lastMessage.createTime);
             preview =
@@ -59,7 +59,7 @@ export default function ChatList() {
                     <Icon name="ios-search" style={styles.searchIcon} />
                     <Input
                         style={styles.searchText}
-                        placeholder="搜索群组/用户"
+                        placeholder="Tìm kiếm"
                         autoCapitalize="none"
                         autoCorrect={false}
                         returnKeyType="search"

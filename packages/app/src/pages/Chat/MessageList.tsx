@@ -119,7 +119,7 @@ function MessageList({ $scrollView }: Props) {
             if (result.length > 0) {
                 action.addLinkmanHistoryMessages(focus, result);
             } else {
-                Toast.warning('没有更多消息了');
+                Toast.warning('Không còn tin tức nào nữa');
             }
         }
 
@@ -128,7 +128,7 @@ function MessageList({ $scrollView }: Props) {
         }, 1000);
     }
     /**
-     * 加载历史消息后, 自动滚动到合适位置
+     * Sau khi tải tin nhắn lịch sử, tự động di chuyển đến vị trí thích hợp
      */
     function handleContentSizeChange(
         contentWidth: number,

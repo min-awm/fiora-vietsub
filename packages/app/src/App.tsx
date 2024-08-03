@@ -88,7 +88,7 @@ function App({ title, primaryColor, isLogin }: Props) {
                                     key="other"
                                     component={Other}
                                     hideNavBar
-                                    title="其它"
+                                    title="khác"
                                     icon={({ focused }) => (
                                         <Icon
                                             name="aperture-outline"
@@ -106,7 +106,7 @@ function App({ title, primaryColor, isLogin }: Props) {
                         <Scene
                             key="chat"
                             component={Chat}
-                            title="聊天"
+                            title="Trò chuyện"
                             getTitle={title}
                             hideNavBar={false}
                             navigationBarStyle={{
@@ -120,37 +120,37 @@ function App({ title, primaryColor, isLogin }: Props) {
                         <Scene
                             key="login"
                             component={Login}
-                            title="登录"
+                            title="Đăng nhập"
                             {...sceneCommonProps}
                         />
                         <Scene
                             key="signup"
                             component={Signup}
-                            title="注册"
+                            title="Đăng ký"
                             {...sceneCommonProps}
                         />
                         <Scene
                             key="groupProfile"
                             component={GroupProfile}
-                            title="群组资料"
+                            title="Thông tin nhóm"
                             {...sceneCommonProps}
                         />
                         <Scene
                             key="userInfo"
                             component={UserInfo}
-                            title="个人信息"
+                            title="Thông tin cá nhân"
                             {...sceneCommonProps}
                         />
                         <Scene
                             key="groupInfo"
                             component={GroupInfo}
-                            title="群组信息"
+                            title="Thông tin nhóm"
                             {...sceneCommonProps}
                         />
                         <Scene
                             key="searchResult"
                             component={SearchResult}
-                            title="搜索结果"
+                            title="kết quả tìm kiếm"
                             {...sceneCommonProps}
                         />
                     </Stack>

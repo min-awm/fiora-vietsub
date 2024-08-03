@@ -19,32 +19,31 @@ function convertSystemMessage(message: any) {
     if (message.type === 'system') {
         message.from._id = 'system';
         message.from.originUsername = message.from.username;
-        message.from.username = '乌贼娘殿下';
+        message.from.username = 'Admin';
         message.from.avatar = WuZeiNiangImage;
-        message.from.tag = 'system';
 
         const content = JSON.parse(message.content);
         switch (content.command) {
             case 'roll': {
-                message.content = `掷出了${content.value}点 (上限${content.top}点)`;
+                message.content = `Ném${content.value}điểm (giới hạn trên${content.top}điểm)`;
                 break;
             }
             case 'rps': {
-                message.content = `使出了 ${content.value}`;
+                message.content = `Đùng đến ${content.value}`;
                 break;
             }
             default: {
-                message.content = '不支持的指令';
+                message.content = 'Lệnh không được hỗ trợ';
             }
         }
     } else if (message.deleted) {
         message.type = 'system';
         message.from._id = 'system';
         message.from.originUsername = message.from.username;
-        message.from.username = '乌贼娘殿下';
+        message.from.username = 'Admin';
         message.from.avatar = WuZeiNiangImage;
         message.from.tag = 'system';
-        message.content = `撤回了消息`;
+        message.content = `Đã thu hồi tin nhắn`;
     }
 }
 

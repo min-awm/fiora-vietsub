@@ -38,8 +38,8 @@ function ChatListRightButton() {
                 </View>
             </TouchableOpacity>
             <Dialog.Container visible={showDialog}>
-                <Dialog.Title>创建群组</Dialog.Title>
-                <Dialog.Description>请输入群组名</Dialog.Description>
+                <Dialog.Title>Tạo nhóm</Dialog.Title>
+                <Dialog.Description>Vui lòng nhập tên nhóm</Dialog.Description>
                 <Dialog.Input
                     value={groupName}
                     onChangeText={updateGroupName}
@@ -47,8 +47,8 @@ function ChatListRightButton() {
                     autoFocus
                     autoCorrect={false}
                 />
-                <Dialog.Button label="取消" onPress={handleCloseDialog} />
-                <Dialog.Button label="创建" onPress={handleCreateGroup} />
+                <Dialog.Button label="Hủy bỏ" onPress={handleCloseDialog} />
+                <Dialog.Button label="Tạo" onPress={handleCreateGroup} />
             </Dialog.Container>
         </>
     );

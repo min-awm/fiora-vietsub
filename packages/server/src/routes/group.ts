@@ -40,19 +40,19 @@ async function getGroupOnlineMembersHelper(group: GroupDocument) {
  * @param ctx Context
  */
 export async function createGroup(ctx: Context<{ name: string }>) {
-    assert(!config.disableCreateGroup, '管理员已关闭创建群组功能');
+    assert(!config.disableCreateGroup, 'Quản trị viên đã tắt khả năng tạo nhóm');
 
     const ownGroupCount = await Group.count({ creator: ctx.socket.user });
     assert(
         ctx.socket.isAdmin || ownGroupCount < config.maxGroupsCount,
-        `创建群组失败, 你已经创建了${config.maxGroupsCount}个群组`,
+        `Không tạo được nhóm, bạn đã tạo${config.maxGroupsCount}các nhóm`,
     );
 
     const { name } = ctx.data;
-    assert(name, '群组名不能为空');
+    assert(name, 'Tên nhóm không được để trống');
 
     const group = await Group.findOne({ name });
-    assert(!group, '该群组已存在');
+    assert(!group, 'Nhóm đã tồn tại');
 
     let newGroup = null;
     try {
@@ -64,7 +64,7 @@ export async function createGroup(ctx: Context<{ name: string }>) {
         } as GroupDocument);
     } catch (err) {
         if (err.name === 'ValidationError') {
-            return '群组名包含不支持的字符或者长度超过限制';
+            return 'Tên nhóm chứa các ký tự không được hỗ trợ hoặc vượt quá giới hạn độ dài';
         }
         throw err;
     }
@@ -85,13 +85,13 @@ export async function createGroup(ctx: Context<{ name: string }>) {
  */
 export async function joinGroup(ctx: Context<{ groupId: string }>) {
     const { groupId } = ctx.data;
-    assert(isValid(groupId), '无效的群组ID');
+    assert(isValid(groupId), 'ID nhóm không hợp lệ');
 
     const group = await Group.findOne({ _id: groupId });
     if (!group) {
-        throw new AssertionError({ message: '加入群组失败, 群组不存在' });
+        throw new AssertionError({ message: 'Không thể tham gia nhóm, Nhóm không tồn tại' });
     }
-    assert(group.members.indexOf(ctx.socket.user) === -1, '你已经在群组中');
+    assert(group.members.indexOf(ctx.socket.user) === -1, 'Bạn đã ở trong nhóm');
 
     group.members.push(ctx.socket.user);
     await group.save();
@@ -126,23 +126,23 @@ export async function joinGroup(ctx: Context<{ groupId: string }>) {
  */
 export async function leaveGroup(ctx: Context<{ groupId: string }>) {
     const { groupId } = ctx.data;
-    assert(isValid(groupId), '无效的群组ID');
+    assert(isValid(groupId), 'ID nhóm không hợp lệ');
 
     const group = await Group.findOne({ _id: groupId });
     if (!group) {
-        throw new AssertionError({ message: '群组不存在' });
+        throw new AssertionError({ message: 'Nhóm không tồn tại' });
     }
 
     // 默认群组没有creator
     if (group.creator) {
         assert(
             group.creator.toString() !== ctx.socket.user.toString(),
-            '群主不可以退出自己创建的群',
+            'Chủ sở hữu nhóm không thể thoát khỏi nhóm mà họ đã tạo.',
         );
     }
 
     const index = group.members.indexOf(ctx.socket.user);
-    assert(index !== -1, '你不在群组中');
+    assert(index !== -1, 'Bạn không có trong nhóm');
 
     group.members.splice(index, 1);
     await group.save();
@@ -170,7 +170,7 @@ function getGroupOnlineMembersWrapperV2() {
         ctx: Context<{ groupId: string; cache?: string }>,
     ) {
         const { groupId, cache: cacheKey } = ctx.data;
-        assert(isValid(groupId), '无效的群组ID');
+        assert(isValid(groupId), 'ID nhóm không hợp lệ');
 
         if (
             cache[groupId] &&
@@ -182,7 +182,7 @@ function getGroupOnlineMembersWrapperV2() {
 
         const group = await Group.findOne({ _id: groupId });
         if (!group) {
-            throw new AssertionError({ message: '群组不存在' });
+            throw new AssertionError({ message: 'Nhóm không tồn tại' });
         }
         const result = await getGroupOnlineMembersHelper(group);
         const resultCacheKey = stringHash(
@@ -230,7 +230,7 @@ function getDefaultGroupOnlineMembersWrapper() {
 
         const group = await Group.findOne({ isDefault: true });
         if (!group) {
-            throw new AssertionError({ message: '群组不存在' });
+            throw new AssertionError({ message: 'Nhóm không tồn tại' });
         }
         cache = await getGroupOnlineMembersHelper(group);
         expireTime = Date.now() + GroupOnlineMembersCacheExpireTime;
@@ -247,16 +247,16 @@ export async function changeGroupAvatar(
     ctx: Context<{ groupId: string; avatar: string }>,
 ) {
     const { groupId, avatar } = ctx.data;
-    assert(isValid(groupId), '无效的群组ID');
-    assert(avatar, '头像地址不能为空');
+    assert(isValid(groupId), 'ID nhóm không hợp lệ');
+    assert(avatar, 'Địa chỉ avatar không được để trống');
 
     const group = await Group.findOne({ _id: groupId });
     if (!group) {
-        throw new AssertionError({ message: '群组不存在' });
+        throw new AssertionError({ message: 'Nhóm không tồn tại' });
     }
     assert(
         group.creator.toString() === ctx.socket.user.toString(),
-        '只有群主才能修改头像',
+        'Chỉ chủ nhóm mới có thể sửa đổi hình đại diện',
     );
 
     await Group.updateOne({ _id: groupId }, { avatar });
@@ -271,21 +271,21 @@ export async function changeGroupName(
     ctx: Context<{ groupId: string; name: string }>,
 ) {
     const { groupId, name } = ctx.data;
-    assert(isValid(groupId), '无效的群组ID');
-    assert(name, '群组名称不能为空');
+    assert(isValid(groupId), 'ID nhóm không hợp lệ');
+    assert(name, 'Tên nhóm không được để trống');
 
     const group = await Group.findOne({ _id: groupId });
     if (!group) {
-        throw new AssertionError({ message: '群组不存在' });
+        throw new AssertionError({ message: 'Nhóm không tồn tại' });
     }
-    assert(group.name !== name, '新群组名不能和之前一致');
+    assert(group.name !== name, 'Tên nhóm mới không thể giống với tên trước đó');
     assert(
         group.creator.toString() === ctx.socket.user.toString(),
-        '只有群主才能修改头像',
+        'Chỉ chủ nhóm mới có thể sửa đổi hình đại diện',
     );
 
     const targetGroup = await Group.findOne({ name });
-    assert(!targetGroup, '该群组名已存在');
+    assert(!targetGroup, 'Tên nhóm đã tồn tại');
 
     await Group.updateOne({ _id: groupId }, { name });
 
@@ -300,17 +300,17 @@ export async function changeGroupName(
  */
 export async function deleteGroup(ctx: Context<{ groupId: string }>) {
     const { groupId } = ctx.data;
-    assert(isValid(groupId), '无效的群组ID');
+    assert(isValid(groupId), 'ID nhóm không hợp lệ');
 
     const group = await Group.findOne({ _id: groupId });
     if (!group) {
-        throw new AssertionError({ message: '群组不存在' });
+        throw new AssertionError({ message: 'Nhóm không tồn tại' });
     }
     assert(
         group.creator.toString() === ctx.socket.user.toString(),
-        '只有群主才能解散群组',
+        'Chỉ chủ sở hữu nhóm mới có thể giải thể nhóm',
     );
-    assert(group.isDefault !== true, '默认群组不允许解散');
+    assert(group.isDefault !== true, 'Nhóm mặc định không cho phép giải tán');
 
     await Group.deleteOne({ _id: group });
 
@@ -321,11 +321,11 @@ export async function deleteGroup(ctx: Context<{ groupId: string }>) {
 
 export async function getGroupBasicInfo(ctx: Context<{ groupId: string }>) {
     const { groupId } = ctx.data;
-    assert(isValid(groupId), '无效的群组ID');
+    assert(isValid(groupId), 'ID nhóm không hợp lệ');
 
     const group = await Group.findOne({ _id: groupId });
     if (!group) {
-        throw new AssertionError({ message: '群组不存在' });
+        throw new AssertionError({ message: 'Nhóm không tồn tại' });
     }
 
     return {

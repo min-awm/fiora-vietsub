@@ -55,7 +55,7 @@ function Other() {
     async function logout() {
         action.logout();
         await removeStorageValue('token');
-        Toast.show({ text: '您已经退出登录' });
+        Toast.show({ text: 'Bạn đã đăng xuất' });
         socket.disconnect();
         socket.connect();
     }
@@ -98,7 +98,7 @@ function Other() {
                         }
                     >
                         <Body>
-                            <Text style={styles.listItemTitle}>源码</Text>
+                            <Text style={styles.listItemTitle}>Mã nguồn</Text>
                         </Body>
                         <Right>
                             <Icon
@@ -115,7 +115,7 @@ function Other() {
                         }
                     >
                         <Body>
-                            <Text style={styles.listItemTitle}>作者</Text>
+                            <Text style={styles.listItemTitle}>Tác giả</Text>
                         </Body>
                         <Right>
                             <Icon
@@ -133,7 +133,7 @@ function Other() {
                     >
                         <Body>
                             <Text style={styles.listItemTitle}>
-                                fiora 网页版
+                                fiora Phiên bản web
                             </Text>
                         </Body>
                         <Right>
@@ -153,17 +153,17 @@ function Other() {
                     style={styles.logoutButton}
                     onPress={logout}
                 >
-                    <Text>退出登录</Text>
+                    <Text>Đăng xuất</Text>
                 </Button>
             ) : (
                 <Button block style={styles.logoutButton} onPress={login}>
-                    <Text>登录 / 注册</Text>
+                    <Text>Đăng nhập / Đăng ký</Text>
                 </Button>
             )}
             <View style={styles.copyrightContainer}>
                 <Text style={styles.copyright}>
-                    Copyright© 2015-
-                    {new Date().getFullYear()} 碎碎酱
+                    Copyright© 2024-
+                    {new Date().getFullYear()} fiora
                 </Text>
             </View>
             <PrivacyPolicy

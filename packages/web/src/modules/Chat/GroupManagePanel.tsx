@@ -44,7 +44,7 @@ function GroupManagePanel(props: GroupManagePanelProps) {
     async function handleChangeGroupName() {
         const isSuccess = await changeGroupName(groupId, groupName);
         if (isSuccess) {
-            Message.success('修改群名称成功');
+            Message.success('Tên nhóm đã được sửa đổi thành công');
             action.setLinkmanProperty(groupId, 'name', groupName);
         }
     }
@@ -59,7 +59,7 @@ function GroupManagePanel(props: GroupManagePanelProps) {
         }
         if (image.length > config.maxAvatarSize) {
             // eslint-disable-next-line consistent-return
-            return Message.error('设置群头像失败, 请选择小于1.5MB的图片');
+            return Message.error('Không đặt được hình đại diện của nhóm, Vui lòng chọn ít hơn 1.Hình ảnh 5 MB');
         }
 
         try {
@@ -74,11 +74,11 @@ function GroupManagePanel(props: GroupManagePanelProps) {
                     'avatar',
                     URL.createObjectURL(image.result),
                 );
-                Message.success('修改群头像成功');
+                Message.success('Hình đại diện của nhóm đã được sửa đổi thành công');
             }
         } catch (err) {
             console.error(err);
-            Message.error('上传群头像失败');
+            Message.error('Không thể tải lên hình đại diện của nhóm');
         }
     }
 
@@ -88,7 +88,7 @@ function GroupManagePanel(props: GroupManagePanelProps) {
             setDialogStatus(false);
             onClose();
             action.removeLinkman(groupId);
-            Message.success('解散群组成功');
+            Message.success('Nhóm đã tan rã thành công');
         }
     }
 
@@ -97,7 +97,7 @@ function GroupManagePanel(props: GroupManagePanelProps) {
         if (isSuccess) {
             onClose();
             action.removeLinkman(groupId);
-            Message.success('退出群组成功');
+            Message.success('Đã thoát khỏi nhóm thành công');
         }
     }
 
@@ -128,11 +128,11 @@ function GroupManagePanel(props: GroupManagePanelProps) {
                     visible ? Style.show : Style.hide
                 }`}
             >
-                <p className={Style.title}>群组信息</p>
+                <p className={Style.title}>Thông tin nhóm</p>
                 <div className={Style.content}>
                     {isLogin && selfId === creator ? (
                         <div className={Style.block}>
-                            <p className={Style.blockTitle}>修改群名称</p>
+                            <p className={Style.blockTitle}>Sửa đổi tên nhóm</p>
                             <Input
                                 className={Style.input}
                                 value={groupName}
@@ -142,31 +142,31 @@ function GroupManagePanel(props: GroupManagePanelProps) {
                                 className={Style.button}
                                 onClick={handleChangeGroupName}
                             >
-                                确认修改
+                                Xác nhận những thay đổi
                             </Button>
                         </div>
                     ) : null}
                     {isLogin && selfId === creator ? (
                         <div className={Style.block}>
-                            <p className={Style.blockTitle}>修改群头像</p>
+                            <p className={Style.blockTitle}>Sửa đổi hình đại diện của nhóm</p>
                             <img
                                 className={Style.avatar}
                                 src={getOSSFileUrl(avatar)}
-                                alt="群头像预览"
+                                alt="Xem trước hình đại diện nhóm"
                                 onClick={handleChangeGroupAvatar}
                             />
                         </div>
                     ) : null}
 
                     <div className={Style.block}>
-                        <p className={Style.blockTitle}>功能</p>
+                        <p className={Style.blockTitle}>Chức năng</p>
                         {selfId === creator ? (
                             <Button
                                 className={Style.button}
                                 type="danger"
                                 onClick={() => setDialogStatus(true)}
                             >
-                                解散群组
+                                Loại bỏ nhóm
                             </Button>
                         ) : (
                             <Button
@@ -174,13 +174,13 @@ function GroupManagePanel(props: GroupManagePanelProps) {
                                 type="danger"
                                 onClick={handleLeaveGroup}
                             >
-                                退出群组
+                                Thoát khỏi nhóm
                             </Button>
                         )}
                     </div>
                     <div className={Style.block}>
                         <p className={Style.blockTitle}>
-                            在线成员 &nbsp;<span>{onlineMembers.length}</span>
+                            Thành viên trực tuyến &nbsp;<span>{onlineMembers.length}</span>
                         </p>
                         <div>
                             {onlineMembers.map((member) => (
@@ -225,7 +225,7 @@ function GroupManagePanel(props: GroupManagePanelProps) {
                     </div>
                     <Dialog
                         className={Style.deleteGroupConfirmDialog}
-                        title="再次确认是否解散群组?"
+                        title="Xác nhận lại xem có giải tán nhóm hay không?"
                         visible={deleteConfirmDialog}
                         onClose={() => setDialogStatus(false)}
                     >
@@ -234,13 +234,13 @@ function GroupManagePanel(props: GroupManagePanelProps) {
                             type="danger"
                             onClick={handleDeleteGroup}
                         >
-                            确认
+                            Xác nhận
                         </Button>
                         <Button
                             className={Style.deleteGroupConfirmButton}
                             onClick={() => setDialogStatus(false)}
                         >
-                            取消
+                            Hủy bỏ
                         </Button>
                     </Dialog>
                 </div>

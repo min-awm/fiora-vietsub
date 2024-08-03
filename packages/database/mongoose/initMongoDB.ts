@@ -14,7 +14,7 @@ export default function initMongoDB() {
     return new Promise((resolve) => {
         mongoose.connect(
             config.database,
-            { useNewUrlParser: true, useUnifiedTopology: true },
+            { useNewUrlParser: true, useUnifiedTopology: true, dbName: config.databaseName },
             async (err) => {
                 if (err) {
                     logger.error('[mongoDB]', err.message);

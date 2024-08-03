@@ -39,8 +39,8 @@ export default function Login() {
     return (
         <Container>
             <Base
-                buttonText="登录"
-                jumpText="注册新用户"
+                buttonText="Đăng nhập"
+                jumpText="Đăng ký người dùng mới"
                 jumpPage="signup"
                 onSubmit={handleSubmit}
             />

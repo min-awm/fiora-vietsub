@@ -229,7 +229,7 @@ export default function Input({ onHeightChange }: Props) {
                             // @ts-ignore
                             ref={$input}
                             style={styles.input}
-                            placeholder="随便聊点啥吧, 不要无意义刷屏~~"
+                            placeholder="Hãy nói về bất cứ điều gì bạn muốn ~~"
                             onChangeText={handleChangeText}
                             onSubmitEditing={handleSubmit}
                             autoCapitalize="none"
@@ -245,7 +245,7 @@ export default function Input({ onHeightChange }: Props) {
                 ) : (
                     <Button block style={styles.button} onPress={Actions.login}>
                         <Text style={styles.buttonText}>
-                            登录 / 注册, 参与聊天
+                            Đăng nhập / Đăng ký, tham gia trò chuyện
                         </Text>
                     </Button>
                 )}
@@ -365,7 +365,7 @@ const styles = StyleSheet.create({
         color: '#666',
     },
 
-    // 表情框
+    // Hộp biểu tượng cảm xúc
     expressionContainer: {
         height: (isiOS ? 34 : 30) * 5 + 6,
         flexDirection: 'row',

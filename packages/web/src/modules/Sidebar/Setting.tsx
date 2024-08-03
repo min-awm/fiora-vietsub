@@ -90,7 +90,7 @@ function Setting(props: SettingProps) {
             window.localStorage.removeItem(LocalStorageKey.PrimaryTextColor);
             window.localStorage.removeItem(LocalStorageKey.BackgroundImage);
             window.localStorage.removeItem(LocalStorageKey.Aero);
-            Message.success('已修改主题');
+            Message.success('Chủ đề đã được sửa đổi');
         } else {
             window.localStorage.setItem(
                 LocalStorageKey.PrimaryColor,
@@ -125,7 +125,7 @@ function Setting(props: SettingProps) {
             }
             if (image.length > config.maxBackgroundImageSize) {
                 // eslint-disable-next-line consistent-return
-                return Message.error('设置背景图失败, 请选择小于3MB的图片');
+                return Message.error('Không đặt được hình nền, Vui lòng chọn hình ảnh nhỏ hơn 3MB');
             }
             const imageUrl = await uploadFile(
                 image.result as Blob,
@@ -160,15 +160,15 @@ function Setting(props: SettingProps) {
                 renderTabBar={() => <ScrollableInkTabBar />}
                 renderTabContent={() => <TabContent />}
             >
-                <TabPane tab="功能" key="function">
+                <TabPane tab="Chức năng" key="function">
                     <div
                         className={`${Common.container} ${Style.scrollContainer}`}
                     >
                         <div className={Common.block}>
-                            <p className={Common.title}>开关</p>
+                            <p className={Common.title}>Chức năng</p>
                             <div className={Style.switchContainer}>
                                 <div className={Style.switch}>
-                                    <p className={Style.switchText}>声音提醒</p>
+                                    <p className={Style.switchText}>Âm thanh nhắc nhở</p>
                                     <Switch
                                         onChange={(value) =>
                                             action.setStatus(
@@ -180,7 +180,7 @@ function Setting(props: SettingProps) {
                                     />
                                 </div>
                                 <div className={Style.switch}>
-                                    <p className={Style.switchText}>桌面提醒</p>
+                                    <p className={Style.switchText}>Lời nhắc trên màn hình</p>
                                     <Switch
                                         onChange={(value) =>
                                             action.setStatus(
@@ -192,7 +192,7 @@ function Setting(props: SettingProps) {
                                     />
                                 </div>
                                 <div className={Style.switch}>
-                                    <p className={Style.switchText}>语音播报</p>
+                                    <p className={Style.switchText}>Phát sóng bằng giọng nói</p>
                                     <Switch
                                         onChange={(value) =>
                                             action.setStatus(
@@ -205,7 +205,7 @@ function Setting(props: SettingProps) {
                                 </div>
                                 <div className={Style.switch}>
                                     <p className={Style.switchText}>
-                                        播报自己消息
+                                        Phát sóng tin tức của riêng bạn
                                     </p>
                                     <Switch
                                         onChange={(value) =>
@@ -219,7 +219,7 @@ function Setting(props: SettingProps) {
                                 </div>
                                 <div className={Style.switch}>
                                     <p className={Style.switchText}>
-                                        根据输入内容推荐表情
+                                        Đề xuất biểu tượng cảm xúc dựa trên nội dung đầu vào
                                     </p>
                                     <Switch
                                         onChange={(value) =>
@@ -234,7 +234,7 @@ function Setting(props: SettingProps) {
                             </div>
                         </div>
                         <div className={Common.block}>
-                            <p className={Common.title}>提示音</p>
+                            <p className={Common.title}>Âm thanh trình chiếu</p>
                             <div>
                                 <RadioGroup
                                     className={Style.radioGroup}
@@ -243,26 +243,26 @@ function Setting(props: SettingProps) {
                                     horizontal
                                 >
                                     <RadioButton value="default">
-                                        默认
+                                        Mặc định
                                     </RadioButton>
                                     <RadioButton value="apple">
-                                        苹果
+                                        Quả táo
                                     </RadioButton>
                                     <RadioButton value="pcqq">
-                                        电脑QQ
+                                        QQ máy tính
                                     </RadioButton>
                                     <RadioButton value="mobileqq">
-                                        手机QQ
+                                        QQ di động
                                     </RadioButton>
-                                    <RadioButton value="momo">陌陌</RadioButton>
+                                    <RadioButton value="momo">Momo</RadioButton>
                                     <RadioButton value="huaji">
-                                        滑稽
+                                        Buồn cười
                                     </RadioButton>
                                 </RadioGroup>
                             </div>
                         </div>
                         <div className={Common.block}>
-                            <p className={Common.title}>标签颜色</p>
+                            <p className={Common.title}>Màu nhãn</p>
                             <div>
                                 <RadioGroup
                                     className={Style.TagModeRadioGroup}
@@ -276,20 +276,20 @@ function Setting(props: SettingProps) {
                                     horizontal
                                 >
                                     <RadioButton value="singleColor">
-                                        单一颜色
+                                        Màu đơn
                                     </RadioButton>
                                     <RadioButton value="fixedColor">
-                                        固定颜色
+                                        Màu cố định
                                     </RadioButton>
                                     <RadioButton value="randomColor">
-                                        随机颜色
+                                        Màu sắc ngẫu nhiên
                                     </RadioButton>
                                 </RadioGroup>
                             </div>
                         </div>
                     </div>
                 </TabPane>
-                <TabPane tab="主题" key="theme">
+                <TabPane tab="Chủ đề" key="theme">
                     <div
                         className={`${Common.container} ${Style.scrollContainer}`}
                     >
@@ -304,11 +304,11 @@ function Setting(props: SettingProps) {
                                     horizontal
                                 >
                                     <RadioButton value="default">
-                                        默认
+                                        Mặc định
                                     </RadioButton>
-                                    <RadioButton value="cool">清爽</RadioButton>
+                                    <RadioButton value="cool">Làm mới</RadioButton>
                                     <RadioButton value="custom">
-                                        自定义
+                                        Tùy chỉnh
                                     </RadioButton>
                                 </RadioGroup>
                             </div>
@@ -316,7 +316,7 @@ function Setting(props: SettingProps) {
                         {theme === 'custom' && (
                             <>
                                 <div className={Common.block}>
-                                    <p className={Common.title}>毛玻璃效果</p>
+                                    <p className={Common.title}>Hiệu ứng kính mờ</p>
                                     <div>
                                         <Switch
                                             onChange={(value) =>
@@ -328,10 +328,10 @@ function Setting(props: SettingProps) {
                                 </div>
                                 <div className={Common.block}>
                                     <p className={Common.title}>
-                                        背景图{' '}
+                                        Hình nền{' '}
                                         <span className={Style.backgroundTip}>
-                                            背景图会被拉伸到浏览器窗口大小,
-                                            合理的比例会取得更好的效果
+                                            Hình nền sẽ được kéo dài theo kích thước của cửa sổ trình duyệt,
+                                            Tỷ lệ hợp lý sẽ đạt kết quả tốt hơn
                                         </span>
                                     </p>
                                     <div
@@ -346,7 +346,7 @@ function Setting(props: SettingProps) {
                                                 backgroundLoading ? 'blur' : ''
                                             }`}
                                             src={getOSSFileUrl(backgroundImage)}
-                                            alt="背景图预览"
+                                            alt="Xem trước ảnh nền"
                                             onClick={selectBackgroundImage}
                                         />
                                         <ReactLoading
@@ -366,7 +366,7 @@ function Setting(props: SettingProps) {
                                 </div>
                                 {TwitterPicker && (
                                     <div className={Common.block}>
-                                        <p className={Common.title}>主题颜色</p>
+                                        <p className={Common.title}>Màu chủ đề</p>
                                         <div className={Style.colorInfo}>
                                             <div
                                                 style={{
@@ -385,7 +385,7 @@ function Setting(props: SettingProps) {
                                 )}
                                 {TwitterPicker && (
                                     <div className={Common.block}>
-                                        <p className={Common.title}>文字颜色</p>
+                                        <p className={Common.title}>Văn bản màu</p>
                                         <div className={Style.colorInfo}>
                                             <div
                                                 style={{

@@ -10,11 +10,11 @@ export default {
     port: env.Port ? parseInt(env.Port, 10) : 9200,
 
     // mongodb address
-    database: env.Database || 'mongodb://localhost:27017/fiora',
+    database: env.Database || 'mongodb://localhost:27017',
+    databaseName: env.MONGODB_DATABASE_NAME || 'fiora',
 
     redis: {
-        host: env.RedisHost || 'localhost',
-        port: env.RedisPort ? parseInt(env.RedisPort, 10) : 6379,
+        url: env.Redis || 'redis://@localhost:6379/0'
     },
 
     // jwt encryption secret

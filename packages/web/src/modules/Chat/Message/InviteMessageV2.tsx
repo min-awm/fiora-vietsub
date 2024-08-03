@@ -20,7 +20,7 @@ function InviteMessage(props: InviteMessageProps) {
         if (group) {
             group.type = 'group';
             action.addLinkman(group, true);
-            Message.success('加入群组成功');
+            Message.success('Đã tham gia nhóm thành công');
             const messages = await getLinkmanHistoryMessages(invite.group, 0);
             if (messages) {
                 action.addLinkmanHistoryMessages(invite.group, messages);
@@ -36,11 +36,11 @@ function InviteMessage(props: InviteMessageProps) {
         >
             <div className={Style.info}>
                 <span className={Style.info}>
-                    &quot;{invite.inviterName}&quot; 邀请你加入群组「
+                    &quot;{invite.inviterName}&quot; Mời các bạn vào nhóm
                     {invite.groupName}」
                 </span>
             </div>
-            <p className={Style.join}>加入</p>
+            <p className={Style.join}>Tham gia vào</p>
         </div>
     );
 }

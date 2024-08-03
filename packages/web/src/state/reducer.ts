@@ -375,7 +375,7 @@ function reducer(state: State = initialState, action: Action): State {
                 /* istanbul ignore next */
                 if (!__TEST__) {
                     console.warn(
-                        `ActionTypes.SetFocus Error: 联系人 ${focus} 不存在`,
+                        `ActionTypes.SetFocus Error: Người liên hệ ${focus} không tồn tại`,
                     );
                 }
                 return state;
@@ -529,7 +529,7 @@ function reducer(state: State = initialState, action: Action): State {
                 /* istanbul ignore next */
                 if (!__TEST__) {
                     console.warn(
-                        `ActionTypes.DeleteMessage Error: 联系人 ${linkmanId} 不存在`,
+                        `ActionTypes.DeleteMessage Error: Người liên hệ ${linkmanId} không tồn tại`,
                     );
                 }
                 return state;

@@ -16,27 +16,27 @@ function Reward(props: RewardProps) {
         <Dialog
             className={Style.reward}
             visible={visible}
-            title="打赏"
+            title="Phần thưởng"
             onClose={onClose}
         >
             <div>
                 <p className={Style.text}>
-                    如果你觉得这个聊天室代码对你有帮助, 希望打赏下给个鼓励~~
+                    Nếu bạn cho rằng mã phòng trò chuyện này hữu ích với bạn, tôi hy vọng bạn có thể tặng tôi phần thưởng
                     <br />
-                    作者大多数时间在线, 欢迎提问, 有问必答
+                    Tác giả trực tuyến hầu hết thời gian. Các câu hỏi đều được chào đón và tất cả các câu hỏi sẽ được trả lời.
                 </p>
-                <div className={Style.imageContainer}>
+                {/* <div className={Style.imageContainer}>
                     <img
                         className={Style.image}
                         src={AlipayImage}
-                        alt="支付宝二维码"
+                        alt="Mã QR của Alipay"
                     />
                     <img
                         className={Style.image}
                         src={WxpayImage}
-                        alt="微信二维码"
+                        alt="Mã QR Wechat"
                     />
-                </div>
+                </div> */}
             </div>
         </Dialog>
     );

@@ -19,30 +19,30 @@ function Download(props: DownloadProps) {
         <Dialog
             className={Style.download}
             visible={visible}
-            title="下载APP"
+            title="Tải ứng dụng"
             onClose={onClose}
         >
             <div className={Common.container}>
                 <div className={Common.block}>
                     <p className={Common.title}>Android</p>
-                    <div className={Style.android}>
+                    {/* <div className={Style.android}>
                         <p>
-                            链接:{' '}
+                            Liên kết:{' '}
                             <a href={androidDownloadUrl}>
                                 {androidDownloadUrl}
                             </a>
                         </p>
                         <QRCode value={androidDownloadUrl} size={200} />
-                    </div>
+                    </div> */}
                 </div>
                 <div className={Common.block}>
                     <p className={Common.title}>iOS</p>
-                    <div className={Style.ios}>
+                    {/* <div className={Style.ios}>
                         <p>
-                            链接: <a href={iOSDownloadUrl}>{iOSDownloadUrl}</a>
+                            Liên kết: <a href={iOSDownloadUrl}>{iOSDownloadUrl}</a>
                         </p>
                         <QRCode value={iOSDownloadUrl} size={200} />
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </Dialog>

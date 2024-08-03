@@ -1,6 +1,6 @@
 import { Socket } from 'socket.io';
 
-export const PLEASE_LOGIN = '请登录后再试';
+export const PLEASE_LOGIN = 'Hãy đăng nhập và thử lại';
 
 /**
  * 拦截未登录用户请求需要登录态的接口

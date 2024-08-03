@@ -24,7 +24,7 @@ function CodeDialog(props: CodeDialogProps) {
     return (
         <Dialog
             className={Style.codeDialog}
-            title="查看代码"
+            title="Xem mã"
             visible={visible}
             onClose={onClose}
         >

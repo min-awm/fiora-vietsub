@@ -59,14 +59,14 @@ function Message({
     }, []);
 
     async function handleDeleteMessage() {
-        const options = ['撤回', '取消'];
+        const options = ['Rút', 'Hủy bỏ'];
         ActionSheet.show(
             {
-                options: ['确定', '取消'],
+                options: ['Chắc chắn', 'Hủy bỏ'],
                 cancelButtonIndex: options.findIndex(
-                    (option) => option === '取消',
+                    (option) => option === 'Hủy bỏ',
                 ),
-                title: '是否撤回消息?',
+                title: 'Bạn có muốn gỡ tin nhắn không?',
             },
             async (buttonIndex) => {
                 switch (buttonIndex) {
@@ -92,7 +92,7 @@ function Message({
             return Time.getHourMinute(createTime);
         }
         if (Time.isYesterday(nowTime, createTime)) {
-            return `昨天 ${Time.getHourMinute(createTime)}`;
+            return `Hôm qua ${Time.getHourMinute(createTime)}`;
         }
         if (Time.isSameYear(nowTime, createTime)) {
             return `${Time.getMonthDate(createTime)} ${Time.getHourMinute(
@@ -133,16 +133,16 @@ function Message({
             case 'code': {
                 return (
                     <Text style={{ color: isSelf ? 'white' : '#666' }}>
-                        暂未支持的消息类型[
+                        Các loại tin nhắn chưa được hỗ trợ[
                         {message.type}
-                        ], 请在Web端查看
+                        ], Vui lòng xem nó trên web
                     </Text>
                 );
             }
             default:
                 return (
                     <Text style={{ color: isSelf ? 'white' : '#666' }}>
-                        不支持的消息类型
+                        Loại tin nhắn không được hỗ trợ
                     </Text>
                 );
         }

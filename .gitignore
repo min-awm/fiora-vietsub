@@ -10,8 +10,6 @@ yarn-error.log
 .eslintcache
 lerna-debug.log
 
-.env
-
 packages/server/public/*
 !packages/server/public/avatar/
 packages/server/public/avatar/*_*.*

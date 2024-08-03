@@ -52,11 +52,11 @@ function SelfInfo(props: SelfInfoProps) {
             const isSuccess = await changeAvatar(avatarUrl);
             if (isSuccess) {
                 action.setAvatar(URL.createObjectURL(blob));
-                Message.success('修改头像成功');
+                Message.success('Đã sửa đổi hình đại diện thành công');
             }
         } catch (err) {
             console.error(err);
-            Message.error('上传头像失败');
+            Message.error('Không tải được hình đại diện lên');
         } finally {
             toggleLoading(false);
             setCropper({ enable: false, src: '', ext: '' });
@@ -73,7 +73,7 @@ function SelfInfo(props: SelfInfoProps) {
         }
         if (file.length > config.maxAvatarSize) {
             // eslint-disable-next-line consistent-return
-            return Message.error('设置头像失败, 请选择小于1.5MB的图片');
+            return Message.error('Không đặt được hình đại diện, Vui lòng chọn hình ảnh ít hơn 1.5MB');
         }
 
         // gif头像不需要裁剪
@@ -115,7 +115,7 @@ function SelfInfo(props: SelfInfoProps) {
         const isSuccess = await changePassword(oldPassword, newPassword);
         if (isSuccess) {
             onClose();
-            reLogin('修改密码成功, 请使用新密码重新登录');
+            reLogin('Mật khẩu đã được cập nhật, Vui lòng đăng nhập lại bằng mật khẩu mới');
         }
     }
 
@@ -128,7 +128,7 @@ function SelfInfo(props: SelfInfoProps) {
         const isSuccess = await changeUsername(username);
         if (isSuccess) {
             onClose();
-            reLogin('修改用户名成功, 请使用新用户名重新登录');
+            reLogin('Tên người dùng được sửa đổi thành công, Vui lòng đăng nhập lại bằng tên người dùng mới của bạn');
         }
     }
 
@@ -145,12 +145,12 @@ function SelfInfo(props: SelfInfoProps) {
         <Dialog
             className={Style.selfInfo}
             visible={visible}
-            title="个人信息设置"
+            title="Cài đặt thông tin cá nhân"
             onClose={handleCloseDialog}
         >
             <div className={Common.container}>
                 <div className={Common.block}>
-                    <p className={Common.title}>修改头像</p>
+                    <p className={Common.title}>Sửa đổi hình đại diện</p>
                     <div className={Style.changeAvatar}>
                         {cropper.enable ? (
                             <div className={Style.cropper}>
@@ -170,7 +170,7 @@ function SelfInfo(props: SelfInfoProps) {
                                     className={Style.button}
                                     onClick={handleChangeAvatar}
                                 >
-                                    修改头像
+                                    Sửa đổi hình đại diện
                                 </Button>
                                 <ReactLoading
                                     className={`${Style.loading} ${
@@ -186,7 +186,7 @@ function SelfInfo(props: SelfInfoProps) {
                             <div className={Style.preview}>
                                 <img
                                     className={loading ? 'blur' : ''}
-                                    alt="头像预览"
+                                    alt="Xem trước hình đại diện"
                                     src={getOSSFileUrl(avatar as string)}
                                     onClick={selectAvatar}
                                 />
@@ -204,45 +204,45 @@ function SelfInfo(props: SelfInfoProps) {
                     </div>
                 </div>
                 <div className={Common.block}>
-                    <p className={Common.title}>修改密码</p>
+                    <p className={Common.title}>Đổi mật khẩu</p>
                     <div>
                         <Input
                             className={Style.input}
                             value={oldPassword}
                             onChange={setOldPassword}
                             type="password"
-                            placeholder="旧密码"
+                            placeholder="Mật khẩu cũ"
                         />
                         <Input
                             className={Style.input}
                             value={newPassword}
                             onChange={setNewPassword}
                             type="password"
-                            placeholder="新密码"
+                            placeholder="Mật khẩu mới"
                         />
                         <Button
                             className={Style.button}
                             onClick={handleChangePassword}
                         >
-                            确认修改
+                            Xác nhận
                         </Button>
                     </div>
                 </div>
                 <div className={Common.block}>
-                    <p className={Common.title}>修改用户名</p>
+                    <p className={Common.title}>Sửa đổi tên người dùng</p>
                     <div>
                         <Input
                             className={Style.input}
                             value={username}
                             onChange={setUsername}
                             type="text"
-                            placeholder="用户名"
+                            placeholder="Tên tài khoản"
                         />
                         <Button
                             className={Style.button}
                             onClick={handleChangeUsername}
                         >
-                            确认修改
+                            Xác nhận
                         </Button>
                     </div>
                 </div>

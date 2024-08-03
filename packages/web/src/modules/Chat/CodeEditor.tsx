@@ -158,7 +158,7 @@ function CodeEditor(props: CodeEditorProps) {
                         break;
                     }
                     default: {
-                        console.warn('不支持的语言包', language);
+                        console.warn('Gói ngôn ngữ không được hỗ trợ', language);
                     }
                 }
                 loadedLanguage[language] = true;
@@ -203,13 +203,13 @@ function CodeEditor(props: CodeEditorProps) {
         <>
             <Dialog
                 className={Style.codeEditor}
-                title="请输入要发送的代码"
+                title="Vui lòng nhập code để gửi:"
                 visible={visible}
                 onClose={onClose}
             >
                 <div className={Style.container}>
                     <div className={Style.selectContainer}>
-                        <h3 className={Style.title}>编程语言: </h3>
+                        <h3 className={Style.title}>Ngôn ngữ lập trình: </h3>
                         <Select
                             className={Style.languageSelect}
                             defaultValue={languages[0]}
@@ -230,7 +230,7 @@ function CodeEditor(props: CodeEditorProps) {
                         className={Style.sendButton}
                         onClick={() => onSend(language, value)}
                     >
-                        发送
+                        Gửi
                     </Button>
                 </div>
             </Dialog>

@@ -81,19 +81,19 @@ function GroupInfo(props: GroupInfoProps) {
                             largerAvatar ? 'show' : 'hide'
                         }`}
                         src={getOSSFileUrl(group.avatar)}
-                        alt="群组头像"
+                        alt="Hình đại diện nhóm"
                     />
                     <p>{group.name}</p>
                 </div>
                 <div className={Style.info}>
                     <div className={Style.onlineStatus}>
-                        <p className={Style.onlineText}>成员:</p>
+                        <p className={Style.onlineText}>Thành viên:</p>
                         <div>{group.members}人</div>
                     </div>
                     {hasLinkman ? (
-                        <Button onClick={handleFocusGroup}>发送消息</Button>
+                        <Button onClick={handleFocusGroup}>Gửi tin nhắn</Button>
                     ) : (
-                        <Button onClick={handleJoinGroup}>加入群组</Button>
+                        <Button onClick={handleJoinGroup}>Tham gia nhóm</Button>
                     )}
                 </div>
             </div>

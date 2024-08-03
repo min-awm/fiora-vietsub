@@ -62,7 +62,7 @@ function Sidebar() {
     function logout() {
         action.logout();
         window.localStorage.removeItem('token');
-        Message.success('您已经退出登录');
+        Message.success('Bạn đã đăng xuất');
         socket.disconnect();
         socket.connect();
     }
@@ -103,7 +103,7 @@ function Sidebar() {
                     {isLogin &&
                         isAdmin &&
                         renderTooltip(
-                            '管理员',
+                            'Quản trị viên',
                             <IconButton
                                 width={40}
                                 height={40}
@@ -112,14 +112,14 @@ function Sidebar() {
                                 onClick={() => toggleAdminDialogVisible(true)}
                             />,
                         )}
-                    <Tooltip
+                    {/* <Tooltip
                         placement="right"
                         mouseEnterDelay={0.3}
-                        overlay={<span>源码</span>}
+                        overlay={<span>Mã nguồn</span>}
                     >
                         <a
                             className={Style.linkButton}
-                            href="https://github.com/yinxin630/fiora"
+                            href="# "
                             target="_black"
                             rel="noopener noreferrer"
                         >
@@ -130,9 +130,9 @@ function Sidebar() {
                                 iconSize={26}
                             />
                         </a>
-                    </Tooltip>
+                    </Tooltip> */}
                     {renderTooltip(
-                        '下载APP',
+                        'Tải ứng dụng',
                         <IconButton
                             width={40}
                             height={40}
@@ -141,8 +141,8 @@ function Sidebar() {
                             onClick={() => toggleDownloadDialogVisible(true)}
                         />,
                     )}
-                    {renderTooltip(
-                        '打赏',
+                    {/* {renderTooltip(
+                        'Phần thưởng',
                         <IconButton
                             width={40}
                             height={40}
@@ -150,9 +150,9 @@ function Sidebar() {
                             iconSize={26}
                             onClick={() => toggleRewardDialogVisible(true)}
                         />,
-                    )}
+                    )} */}
                     {renderTooltip(
-                        '关于',
+                        'Giới thiệu',
                         <IconButton
                             width={40}
                             height={40}
@@ -163,7 +163,7 @@ function Sidebar() {
                     )}
                     {isLogin &&
                         renderTooltip(
-                            '设置',
+                            'Cài đặt',
                             <IconButton
                                 width={40}
                                 height={40}
@@ -174,7 +174,7 @@ function Sidebar() {
                         )}
                     {isLogin &&
                         renderTooltip(
-                            '退出登录',
+                            'Đăng xuất',
                             <IconButton
                                 width={40}
                                 height={40}

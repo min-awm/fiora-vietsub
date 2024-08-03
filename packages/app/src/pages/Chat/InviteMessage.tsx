@@ -21,7 +21,7 @@ function InviteMessage({ message, isSelf }: Props) {
             group.type = 'group';
             action.addLinkman(group, true);
             Actions.refresh({ title: group.name });
-            Toast.success('加入群组成功');
+            Toast.success('Đã tham gia nhóm thành công');
             const messages = await getLinkmanHistoryMessages(invite.group, 0);
             if (messages) {
                 action.addLinkmanHistoryMessages(invite.group, messages);
@@ -41,12 +41,12 @@ function InviteMessage({ message, isSelf }: Props) {
                     <Text style={styles.text}>
                         &quot;
                         {invite.inviterName}
-                        &quot; 邀请你加入群组「
+                        &quot; Mời các bạn vào nhóm
                         {invite.groupName}」
                     </Text>
                 </View>
                 <View style={styles.join}>
-                    <Text style={styles.text}>加入</Text>
+                    <Text style={styles.text}>Tham gia vào</Text>
                 </View>
             </View>
         </TouchableNativeFeedback>

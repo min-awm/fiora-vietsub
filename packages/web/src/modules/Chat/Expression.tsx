@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import Loading from 'react-loading';
 
-import expressions from '@fiora/utils/expressions';
 import { addParam } from '@fiora/utils/url';
-import BaiduImage from '@fiora/assets/images/baidu.png';
+import EmojiPicker from 'emoji-picker-react';
 import Style from './Expression.less';
 import {
     Tabs,
@@ -37,7 +36,9 @@ function Expression(props: ExpressionProps) {
                 if (result.length !== 0) {
                     setSearchResults(result);
                 } else {
-                    Message.info('没有相关表情, 换个关键字试试吧');
+                    Message.info(
+                        'Không có biểu thức liên quan, Hãy thử thay đổi từ khóa',
+                    );
                 }
             }
             toggleSearchLoading(false);
@@ -46,7 +47,16 @@ function Expression(props: ExpressionProps) {
 
     const renderDefaultExpression = (
         <div className={Style.defaultExpression}>
-            {expressions.default.map((e, index) => (
+            <EmojiPicker
+                allowExpandReactions={false}
+                skinTonesDisabled
+                style={{ border: 'none' }}
+                width="100%"
+                onEmojiClick={(event) => {
+                    onSelectText(event.emoji as string);
+                }}
+            />
+            {/* {expressions.default.map((e, index) => (
                 <div
                     className={Style.defaultExpressionBlock}
                     key={e}
@@ -64,7 +74,7 @@ function Expression(props: ExpressionProps) {
                         }}
                     />
                 </div>
-            ))}
+            ))} */}
         </div>
     );
 
@@ -90,7 +100,7 @@ function Expression(props: ExpressionProps) {
                     className={Style.searchExpressionButton}
                     onClick={handleSearchExpression}
                 >
-                    搜索
+                    Tìm kiếm
                 </Button>
             </div>
             <div
@@ -110,7 +120,7 @@ function Expression(props: ExpressionProps) {
                     <div className={Style.searchImage}>
                         <img
                             src={image}
-                            alt="表情"
+                            alt="Sự biểu lộ"
                             key={image}
                             onClick={handleClickExpression}
                         />
@@ -127,10 +137,10 @@ function Expression(props: ExpressionProps) {
                 renderTabBar={() => <ScrollableInkTabBar />}
                 renderTabContent={() => <TabContent />}
             >
-                <TabPane tab="默认表情" key="default">
+                <TabPane tab="Biểu tượng cảm xúc mặc định" key="default">
                     {renderDefaultExpression}
                 </TabPane>
-                <TabPane tab="搜索表情包" key="search">
+                <TabPane tab="Tìm kiếm meme" key="search">
                     {renderSearchExpression}
                 </TabPane>
             </Tabs>

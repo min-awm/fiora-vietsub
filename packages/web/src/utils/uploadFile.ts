@@ -78,5 +78,5 @@ export default async function uploadFile(
     if (result.res.status === 200) {
         return endpoint + result.name;
     }
-    return Promise.reject('上传文件失败');
+    return Promise.reject('Tải tệp lên không thành công');
 }

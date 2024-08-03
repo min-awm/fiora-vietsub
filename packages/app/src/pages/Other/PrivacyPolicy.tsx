@@ -28,17 +28,17 @@ function PrivacyPolicy({ visible, onClose }: Props) {
 
     return (
         <Dialog.Container visible={visible}>
-            <Dialog.Title>服务协议和隐私条款</Dialog.Title>
+            <Dialog.Title>Thỏa thuận dịch vụ và Chính sách quyền riêng tư</Dialog.Title>
             <Dialog.Description style={styles.container}>
-                欢迎使用 fiora
-                APP。我们非常重视您的个人信息和隐私保护，在您使用之前，请务必审慎阅读
+                Chào mừng fiora
+                APP。Chúng tôi rất coi trọng việc bảo vệ thông tin cá nhân và quyền riêng tư của bạn. Vui lòng đọc kỹ trước khi sử dụng.
                 <TouchableOpacity onPress={handleClickPrivacyPolicy}>
-                    <Text style={styles.text}>《隐私政策》</Text>
+                    <Text style={styles.text}>《Chính sách bảo mật》</Text>
                 </TouchableOpacity>
-                ，并充分理解协议条款内容。我们将严格按照您同意的各项条款使用您的个人信息，以便为您提供更好的服务。
+                ，và hiểu đầy đủ các điều khoản của thỏa thuận. Chúng tôi sẽ sử dụng thông tin cá nhân của bạn theo đúng các điều khoản bạn đồng ý để cung cấp cho bạn những dịch vụ tốt hơn.
             </Dialog.Description>
-            <Dialog.Button label="不同意" onPress={handleDisagree} />
-            <Dialog.Button label="同意" onPress={handleAgree} />
+            <Dialog.Button label="Không đồng ý" onPress={handleDisagree} />
+            <Dialog.Button label="Đồng ý" onPress={handleAgree} />
         </Dialog.Container>
     );
 }

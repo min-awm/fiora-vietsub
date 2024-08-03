@@ -112,7 +112,7 @@ function ChatInput() {
         return (
             <div className={Style.chatInput}>
                 <p className={Style.guest}>
-                    游客朋友你好, 请
+                    Xin chào,
                     <b
                         className={Style.guestLogin}
                         onClick={() =>
@@ -120,9 +120,8 @@ function ChatInput() {
                         }
                         role="button"
                     >
-                        登录
+                        Đăng nhập
                     </b>
-                    后参与聊天
                 </p>
             </div>
         );
@@ -156,7 +155,7 @@ function ChatInput() {
 
     function handleSelectExpression(expression: string) {
         toggleExpressionDialog(false);
-        insertAtCursor(`#(${expression})`);
+        insertAtCursor(expression);
     }
 
     function addSelfMessage(type: string, content: string) {
@@ -224,7 +223,7 @@ function ChatInput() {
         }
 
         if (image.length > config.maxImageSize) {
-            Message.warning('要发送的图片过大', 3);
+            Message.warning('Hình ảnh cần gửi quá lớn', 3);
             return;
         }
 
@@ -251,7 +250,7 @@ function ChatInput() {
                 );
             } catch (err) {
                 console.error(err);
-                Message.error('上传图片失败');
+                Message.error('Không thể tải hình ảnh lên');
             }
         };
         img.src = url;
@@ -259,7 +258,7 @@ function ChatInput() {
 
     async function sendFileMessage(file: ReadFileResult) {
         if (file.length > config.maxFileSize) {
-            Message.warning('要发送的文件过大', 3);
+            Message.warning('Tệp đang được gửi quá lớn', 3);
             return;
         }
 
@@ -289,13 +288,13 @@ function ChatInput() {
             );
         } catch (err) {
             console.error(err);
-            Message.error('上传文件失败');
+            Message.error('Tải tệp lên không thành công');
         }
     }
 
     async function handleSendImage() {
         if (!connect) {
-            return Message.error('发送消息失败, 您当前处于离线状态');
+            return Message.error('Không gửi được tin nhắn, Bạn hiện đang ngoại tuyến');
         }
         const image = await readDiskFile(
             'blob',
@@ -314,7 +313,7 @@ function ChatInput() {
     }
     async function handleSendFile() {
         if (!connect) {
-            Message.error('发送消息失败, 您当前处于离线状态');
+            Message.error('Không gửi được tin nhắn, Bạn hiện đang ngoại tuyến');
             return;
         }
         const file = await readDiskFile('blob');
@@ -361,7 +360,7 @@ function ChatInput() {
         // eslint-disable-next-line react/destructuring-assignment
         if (!connect) {
             e.preventDefault();
-            return Message.error('发送消息失败, 您当前处于离线状态');
+            return Message.error('Không gửi được tin nhắn, Bạn hiện đang ngoại tuyến');
         }
         const { items, types } =
             e.clipboardData || e.originalEvent.clipboardData;
@@ -405,7 +404,7 @@ function ChatInput() {
 
     function sendTextMessage() {
         if (!connect) {
-            return Message.error('发送消息失败, 您当前处于离线状态');
+            return Message.error('Không gửi được tin nhắn, Bạn hiện đang ngoại tuyến');
         }
 
         // @ts-ignore
@@ -564,11 +563,11 @@ function ChatInput() {
 
     function handleSendCode(language: string, rawCode: string) {
         if (!connect) {
-            return Message.error('发送消息失败, 您当前处于离线状态');
+            return Message.error('Không gửi được tin nhắn, Bạn hiện đang ngoại tuyến');
         }
 
         if (rawCode === '') {
-            return Message.warning('请输入内容');
+            return Message.warning('Vui lòng nhập nội dung');
         }
 
         const code = `@language=${language}@${rawCode}`;
@@ -620,10 +619,10 @@ function ChatInput() {
                 overlay={
                     <div className={Style.featureDropdown}>
                         <Menu onClick={handleFeatureMenuClick}>
-                            <MenuItem key="huaji">发送滑稽</MenuItem>
-                            <MenuItem key="image">发送图片</MenuItem>
-                            <MenuItem key="code">发送代码</MenuItem>
-                            <MenuItem key="file">发送文件</MenuItem>
+                            <MenuItem key="huaji">Gửi Gif</MenuItem>
+                            <MenuItem key="image">Gửi ảnh</MenuItem>
+                            <MenuItem key="code">Gửi Code</MenuItem>
+                            <MenuItem key="file">Gửi file</MenuItem>
                         </Menu>
                     </div>
                 }
@@ -646,7 +645,7 @@ function ChatInput() {
                 <input
                     className={Style.input}
                     type="text"
-                    placeholder="随便聊点啥吧, 不要无意义刷屏~~"
+                    placeholder="Hãy nhập nội dung"
                     maxLength={2048}
                     ref={$input}
                     onKeyDown={handleInputKeyDown}
@@ -667,9 +666,9 @@ function ChatInput() {
                         mouseEnterDelay={0.5}
                         overlay={
                             <span>
-                                支持粘贴图片发图
+                                Hỗ trợ dán ảnh và gửi ảnh
                                 <br />
-                                全局按 i 键聚焦
+                                Nhấn phím i để lấy nét toàn cục
                             </span>
                         }
                     >
@@ -719,7 +718,7 @@ function ChatInput() {
                                 className={expressionImage}
                                 src={image}
                                 key={image}
-                                alt="表情图"
+                                alt="Biểu tượng cảm xúc"
                                 onClick={() =>
                                     handleClickExpressionImage(
                                         image,

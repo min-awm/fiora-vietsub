@@ -19,7 +19,7 @@ export default function Signup() {
         });
         if (!err) {
             Toast.show({
-                text: '创建成功',
+                text: 'Đã tạo thành công',
                 type: 'success',
             });
 
@@ -44,8 +44,8 @@ export default function Signup() {
     return (
         <Container>
             <Base
-                buttonText="注册"
-                jumpText="已有账号? 去登陆"
+                buttonText="Đăng ký"
+                jumpText="Tạo tài khoản? Đăng nhập"
                 jumpPage="login"
                 onSubmit={handleSubmit}
             />

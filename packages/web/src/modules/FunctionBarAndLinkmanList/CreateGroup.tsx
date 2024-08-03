@@ -24,14 +24,14 @@ function CreateGroup(props: CreateGroupProps) {
             action.addLinkman(group, true);
             setGroupName('');
             onClose();
-            Message.success('创建群组成功');
+            Message.success('Nhóm được tạo thành công');
         }
     }
 
     return (
-        <Dialog title="创建群组" visible={visible} onClose={onClose}>
+        <Dialog title="Tạo nhóm" visible={visible} onClose={onClose}>
             <div className={Style.container}>
-                <h3 className={Style.text}>请输入群组名</h3>
+                <h3 className={Style.text}>Vui lòng nhập tên nhóm</h3>
                 <Input
                     className={Style.input}
                     value={groupName}
@@ -42,7 +42,7 @@ function CreateGroup(props: CreateGroupProps) {
                     onClick={handleCreateGroup}
                     type="button"
                 >
-                    创建
+                    Tạo
                 </button>
             </div>
         </Dialog>

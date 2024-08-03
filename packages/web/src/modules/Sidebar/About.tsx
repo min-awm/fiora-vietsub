@@ -15,77 +15,77 @@ function About(props: AboutProps) {
         <Dialog
             className={Style.about}
             visible={visible}
-            title="关于"
+            title="Về chúng tôi"
             onClose={onClose}
         >
             <div>
                 <div className={Common.block}>
-                    <p className={Common.title}>作者</p>
+                    <p className={Common.title}>Tác giả</p>
                     <a
-                        href="https://suisuijiang.com"
+                        href="# "
                         target="_black"
                         rel="noopener noreferrer"
                     >
-                        https://suisuijiang.com
+                        https://t.me/kohdev
                     </a>
                 </div>
                 <div className={Common.block}>
-                    <p className={Common.title}>如何搭建</p>
+                    <p className={Common.title}>Làm thế nào để xây dựng</p>
                     <a
-                        href="https://yinxin630.github.io/fiora/zh-Hans/"
+                        href="# "
                         target="_black"
                         rel="noopener noreferrer"
                     >
-                        https://yinxin630.github.io/fiora/zh-Hans/
+                        {/* https://yinxin630.github.io/fiora/zh-Hans/ */}
                     </a>
                 </div>
                 <div className={Common.block}>
-                    <p className={Common.title}>隐私条款</p>
+                    <p className={Common.title}>Chính sách bảo mật</p>
                     <a
                         href="/PrivacyPolicy.html"
                         target="_black"
                         rel="noopener noreferrer"
                     >
-                        {`${window.location.origin}/PrivacyPolicy.html`}
+                        {/* {`${window.location.origin}/PrivacyPolicy.html`} */}
                     </a>
                 </div>
                 <div className={Common.block}>
-                    <p className={Common.title}>将fiora安装到主屏(PWA)</p>
+                    <p className={Common.title}>Cài đặt fiora vào màn hình chính</p>
                     <ul>
                         <li>
-                            点击地址栏最右边三个点按钮(或者地址栏末尾收藏前的按钮)
+                            Nhấp vào nút ba chấm ở ngoài cùng bên phải của thanh địa chỉ (hoặc nút ở cuối thanh địa chỉ trước mục yêu thích)
                         </li>
-                        <li>选择&quot;安装 fiora&quot;</li>
+                        <li>Chọn&quot;Cài đặt fiora&quot;</li>
                     </ul>
                 </div>
                 <div className={Common.block}>
-                    <p className={Common.title}>输入框快捷键</p>
+                    <p className={Common.title}>Phím tắt hộp nhập liệu</p>
                     <ul>
-                        <li>Alt + S: 发送滑稽</li>
-                        <li>Alt + D: 发送表情</li>
+                        <li>Alt + S: Gửi vui</li>
+                        <li>Alt + D: Gửi biểu tượng cảm xúc</li>
                     </ul>
                 </div>
-                <div className={Common.block}>
-                    <p className={Common.title}>命令消息</p>
+                {/* <div className={Common.block}>
+                    <p className={Common.title}>Tin nhắn lệnh</p>
                     <ul>
-                        <li>-roll [number]: 掷点</li>
-                        <li>-rps: 石头剪刀布</li>
+                        <li>-roll [number]: Điểm ném</li>
+                        <li>-rps: Oẳn tù tì</li>
                     </ul>
-                </div>
-                <div className={Common.block}>
-                    <p className={Common.title}>友情链接</p>
+                </div> */}
+                {/* <div className={Common.block}>
+                    <p className={Common.title}>Liên kết</p>
                     <ul>
                         <li>
                             <a
-                                href="https://wangyaxing.cn/"
+                                href="# "
                                 target="_black"
                                 rel="noopener noreferrer"
                             >
-                                木子星兮
+                                Mu Zi Xing Xi
                             </a>
                         </li>
                     </ul>
-                </div>
+                </div> */}
             </div>
         </Dialog>
     );

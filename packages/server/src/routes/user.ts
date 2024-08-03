@@ -85,24 +85,24 @@ async function getUserNotificationTokens(user: UserDocument) {
 export async function register(
     ctx: Context<{ username: string; password: string } & Environment>,
 ) {
-    assert(!config.disableRegister, '注册功能已被禁用, 请联系管理员开通账号');
+    assert(!config.disableRegister, 'Tính năng đăng ký đã bị tắt, Vui lòng liên hệ với quản trị viên để mở tài khoản');
 
     const { username, password, os, browser, environment } = ctx.data;
-    assert(username, '用户名不能为空');
-    assert(password, '密码不能为空');
+    assert(username, 'Tên ngươi dung không được để trông');
+    assert(password, 'Mật khẩu không thể để trống');
 
     const user = await User.findOne({ username });
-    assert(!user, '该用户名已存在');
+    assert(!user, 'Tên người dùng này đã tồn tại');
 
     const registeredCountWithin24Hours = await Redis.get(
         getNewRegisteredUserIpKey(ctx.socket.ip),
     );
-    assert(parseInt(registeredCountWithin24Hours || '0', 10) < 3, '系统错误');
+    assert(parseInt(registeredCountWithin24Hours || '0', 10) < 3, 'Lỗi hệ thống');
 
     const defaultGroup = await Group.findOne({ isDefault: true });
     if (!defaultGroup) {
         // TODO: refactor when node types support "Assertion Functions" https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#assertion-functions
-        throw new AssertionError({ message: '默认群组不存在' });
+        throw new AssertionError({ message: 'Nhóm mặc định không tồn tại' });
     }
 
     const salt = await bcrypt.genSalt(SALT_ROUNDS);
@@ -119,7 +119,7 @@ export async function register(
         } as UserDocument);
     } catch (err) {
         if ((err as Error).name === 'ValidationError') {
-            return '用户名包含不支持的字符或者长度超过限制';
+            return 'Tên người dùng chứa các ký tự không được hỗ trợ hoặc vượt quá giới hạn độ dài';
         }
         throw err;
     }
@@ -174,16 +174,16 @@ export async function login(
     ctx: Context<{ username: string; password: string } & Environment>,
 ) {
     const { username, password, os, browser, environment } = ctx.data;
-    assert(username, '用户名不能为空');
-    assert(password, '密码不能为空');
+    assert(username, 'Tên ngươi dung không được để trông');
+    assert(password, 'Mật khẩu không thể để trống');
 
     const user = await User.findOne({ username });
     if (!user) {
-        throw new AssertionError({ message: '该用户不存在' });
+        throw new AssertionError({ message: 'Người dùng này không tòn tại' });
     }
 
     const isPasswordCorrect = bcrypt.compareSync(password, user.password);
-    assert(isPasswordCorrect, '密码错误');
+    assert(isPasswordCorrect, 'Sai mật khẩu');
 
     await handleNewUser(user);
 
@@ -246,17 +246,17 @@ export async function loginByToken(
     ctx: Context<{ token: string } & Environment>,
 ) {
     const { token, os, browser, environment } = ctx.data;
-    assert(token, 'token不能为空');
+    assert(token, 'Token Không thể trống');
 
     let payload = null;
     try {
         payload = jwt.decode(token, config.jwtSecret);
     } catch (err) {
-        return '非法token';
+        return 'Token không hợp lệ';
     }
 
-    assert(Date.now() < payload.expires, 'token已过期');
-    assert.equal(environment, payload.environment, '非法登录');
+    assert(Date.now() < payload.expires, 'token hết hạn');
+    assert.equal(environment, payload.environment, 'Đăng nhập trái phép');
 
     const user = await User.findOne(
         { _id: payload.user },
@@ -269,7 +269,7 @@ export async function loginByToken(
         },
     );
     if (!user) {
-        throw new AssertionError({ message: '用户不存在' });
+        throw new AssertionError({ message: 'Người dùng không tồn tại' });
     }
 
     await handleNewUser(user);
@@ -349,7 +349,7 @@ export async function guest(ctx: Context<Environment>) {
         },
     );
     if (!group) {
-        throw new AssertionError({ message: '默认群组不存在' });
+        throw new AssertionError({ message: 'Nhóm mặc định không tồn tại' });
     }
     ctx.socket.join(group._id.toString());
 
@@ -376,7 +376,7 @@ export async function guest(ctx: Context<Environment>) {
  */
 export async function changeAvatar(ctx: Context<{ avatar: string }>) {
     const { avatar } = ctx.data;
-    assert(avatar, '新头像链接不能为空');
+    assert(avatar, 'Link avatar mới không được để trống');
 
     await User.updateOne(
         { _id: ctx.socket.user },
@@ -394,16 +394,16 @@ export async function changeAvatar(ctx: Context<{ avatar: string }>) {
  */
 export async function addFriend(ctx: Context<{ userId: string }>) {
     const { userId } = ctx.data;
-    assert(isValid(userId), '无效的用户ID');
-    assert(ctx.socket.user !== userId, '不能添加自己为好友');
+    assert(isValid(userId), 'ID người dùng không hợp lệ');
+    assert(ctx.socket.user !== userId, 'Không thể thêm tôi làm bạn bè');
 
     const user = await User.findOne({ _id: userId });
     if (!user) {
-        throw new AssertionError({ message: '添加好友失败, 用户不存在' });
+        throw new AssertionError({ message: 'Không thể thêm bạn bè, Người dùng không tồn tại' });
     }
 
     const friend = await Friend.find({ from: ctx.socket.user, to: user._id });
-    assert(friend.length === 0, '你们已经是好友了');
+    assert(friend.length === 0, 'Bạn đã là bạn rồi');
 
     const newFriend = await Friend.create({
         from: ctx.socket.user as string,
@@ -425,11 +425,11 @@ export async function addFriend(ctx: Context<{ userId: string }>) {
  */
 export async function deleteFriend(ctx: Context<{ userId: string }>) {
     const { userId } = ctx.data;
-    assert(isValid(userId), '无效的用户ID');
+    assert(isValid(userId), 'ID người dùng không hợp lệ');
 
     const user = await User.findOne({ _id: userId });
     if (!user) {
-        throw new AssertionError({ message: '用户不存在' });
+        throw new AssertionError({ message: 'Người dùng không tồn tại' });
     }
 
     await Friend.deleteOne({ from: ctx.socket.user, to: user._id });
@@ -444,15 +444,15 @@ export async function changePassword(
     ctx: Context<{ oldPassword: string; newPassword: string }>,
 ) {
     const { oldPassword, newPassword } = ctx.data;
-    assert(newPassword, '新密码不能为空');
-    assert(oldPassword !== newPassword, '新密码不能与旧密码相同');
+    assert(newPassword, 'Mật khẩu mới không được để trống');
+    assert(oldPassword !== newPassword, 'Mật khẩu mới không được giống mật khẩu cũ');
 
     const user = await User.findOne({ _id: ctx.socket.user });
     if (!user) {
-        throw new AssertionError({ message: '用户不存在' });
+        throw new AssertionError({ message: 'Người dùng không tồn tại' });
     }
     const isPasswordCorrect = bcrypt.compareSync(oldPassword, user.password);
-    assert(isPasswordCorrect, '旧密码不正确');
+    assert(isPasswordCorrect, 'Mật khẩu cũ không đúng');
 
     const salt = await bcrypt.genSalt(SALT_ROUNDS);
     const hash = await bcrypt.hash(newPassword, salt);
@@ -471,14 +471,14 @@ export async function changePassword(
  */
 export async function changeUsername(ctx: Context<{ username: string }>) {
     const { username } = ctx.data;
-    assert(username, '新用户名不能为空');
+    assert(username, 'Tên người dùng mới không được để trống');
 
     const user = await User.findOne({ username });
-    assert(!user, '该用户名已存在, 换一个试试吧');
+    assert(!user, 'Tên người dùng này đã tồn tại, Thử một cái khac');
 
     const self = await User.findOne({ _id: ctx.socket.user });
     if (!self) {
-        throw new AssertionError({ message: '用户不存在' });
+        throw new AssertionError({ message: 'Người dùng không tồn tại' });
     }
 
     self.username = username;
@@ -495,11 +495,11 @@ export async function changeUsername(ctx: Context<{ username: string }>) {
  */
 export async function resetUserPassword(ctx: Context<{ username: string }>) {
     const { username } = ctx.data;
-    assert(username !== '', 'username不能为空');
+    assert(username !== '', 'username không được để trống');
 
     const user = await User.findOne({ username });
     if (!user) {
-        throw new AssertionError({ message: '用户不存在' });
+        throw new AssertionError({ message: 'Người dùng không tồn tại' });
     }
 
     const newPassword = 'helloworld';
@@ -523,16 +523,16 @@ export async function setUserTag(
     ctx: Context<{ username: string; tag: string }>,
 ) {
     const { username, tag } = ctx.data;
-    assert(username !== '', 'username不能为空');
-    assert(tag !== '', 'tag不能为空');
+    assert(username !== '', 'username Không thể trống');
+    assert(tag !== '', 'tag Không thể trống');
     assert(
         /^([0-9a-zA-Z]{1,2}|[\u4e00-\u9eff]){1,5}$/.test(tag),
-        '标签不符合要求, 允许5个汉字或者10个字母',
+        'Không hợp lệ, cho phép 5 ký tự hoặc 10 chữ cái',
     );
 
     const user = await User.findOne({ username });
     if (!user) {
-        throw new AssertionError({ message: '用户不存在' });
+        throw new AssertionError({ message: 'Người dùng không tồn tại' });
     }
 
     user.tag = tag;
@@ -556,8 +556,8 @@ export async function getUserIps(
     ctx: Context<{ userId: string }>,
 ): Promise<string[]> {
     const { userId } = ctx.data;
-    assert(userId, 'userId不能为空');
-    assert(isValid(userId), '不合法的userId');
+    assert(userId, 'userId Không thể trống');
+    assert(isValid(userId), 'userId không hợp lệ');
 
     const sockets = await Socket.find({ user: userId });
     const ipList = sockets.map((socket) => socket.ip) || [];
@@ -577,8 +577,8 @@ function getUserOnlineStatusWrapper() {
         ctx: Context<{ userId: string }>,
     ) {
         const { userId } = ctx.data;
-        assert(userId, 'userId不能为空');
-        assert(isValid(userId), '不合法的userId');
+        assert(userId, 'userId Không thể trống');
+        assert(isValid(userId), 'userId không hợp lệ');
 
         if (cache[userId] && cache[userId].expireTime > Date.now()) {
             return {

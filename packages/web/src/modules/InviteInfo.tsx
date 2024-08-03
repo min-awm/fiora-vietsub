@@ -74,7 +74,7 @@ function InviteInfo() {
             className={Style.infoDialog}
             visible={visible}
             onClose={handleClose}
-            title="邀请您加入群组"
+            title="Mời bạn tham gia nhóm"
         >
             {visible && group && (
                 <div className={Style.coantainer}>
@@ -90,23 +90,23 @@ function InviteInfo() {
                                 largerAvatar ? 'show' : 'hide'
                             }`}
                             src={group.avatar}
-                            alt="用户头像"
+                            alt="Ảnh đại diện"
                         />
                         <p>{group.name}</p>
                     </div>
                     <div className={Style.info}>
                         <div className={Style.onlineStatus}>
-                            <p className={Style.onlineText}>成员:</p>
+                            <p className={Style.onlineText}>Thành viên:</p>
                             <div>{group.members}人</div>
                         </div>
                         {selfId ? (
                             hasLinkman ? (
                                 <Button onClick={handleFocusGroup}>
-                                    发送消息
+                                    Gửi tin nhắn
                                 </Button>
                             ) : (
                                 <Button onClick={handleJoinGroup}>
-                                    加入群组
+                                    Tham gia nhóm
                                 </Button>
                             )
                         ) : (
@@ -118,7 +118,7 @@ function InviteInfo() {
                                     )
                                 }
                             >
-                                登录 / 注册
+                                Đăng nhập / Đăng ký
                             </Button>
                         )}
                     </div>

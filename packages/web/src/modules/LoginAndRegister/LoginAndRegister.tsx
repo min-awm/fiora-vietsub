@@ -32,10 +32,10 @@ function LoginAndRegister() {
                 renderTabBar={() => <ScrollableInkTabBar />}
                 renderTabContent={() => <TabContent />}
             >
-                <TabPane tab="登录" key="login">
+                <TabPane tab="Đăng nhập" key="login">
                     <Login />
                 </TabPane>
-                <TabPane tab="注册" key="register">
+                <TabPane tab="Đăng ký" key="register">
                     <Register />
                 </TabPane>
             </Tabs>
